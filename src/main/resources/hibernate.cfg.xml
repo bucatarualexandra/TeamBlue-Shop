@@ -8,13 +8,20 @@
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
-        <property name="hibernate.connection.url">jdbc:mysql://localhost/sda_database</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/TeamBlue</property>
 
         <property name="hibernate.connection.username">root</property>
 
-        <property name="hibernate.connection.password">***</property>
+        <property name="hibernate.connection.password">1990_Bracaraugustanorum</property>
 
         <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="TeamBlue-Shop.products.Product"/>
+        <mapping class="TeamBlue-Shop.products.Storage"/>
+        <mapping class="TeamBlue-Shop.sales.Discount"/>
+        <mapping class="TeamBlue-Shop.sales.Order"/>
+        <mapping class="TeamBlue-Shop.users.User"/>
+
 
 
     </session-factory>
