@@ -1,4 +1,5 @@
 import products.Product;
+import products.ProductManagement;
 import utils.Hibernate;
 
 public class MainPage {
@@ -18,18 +19,25 @@ public class MainPage {
 //        product3.setDescription("Cooler A++");
 //        product3.setPrice(3500.0);
 
-//        utils.Hibernate.getInstance().insertProduct(product1, product2, product3);
-//        System.out.println(utils.Hibernate.getInstance().getProductById(1));
+
         Product product1 = new Product();
         product1.setId(1);
         product1.setName("TV");
         product1.setDescription("4k");
-        product1.setPrice(2000.0);
-        Hibernate.getInstance().update(product1);
-//       utils.Hibernate.getInstance().deleteProductById(52);
-        System.out.println(Hibernate.getInstance().getProducts());
+        product1.setPrice(3000.0);
+
+        Product product4 = new Product();
+        product4.setName("Stove");
+        product4.setDescription("Induction stove");
+        product4.setPrice(1500.0);
 
 
+        ProductManagement productManagement = new ProductManagement();
+//        productManagement.update(product1);
+//        productManagement.insert(product4);
+//        System.out.println(productManagement.getById(102));
+        productManagement.deleteById(102);
+        System.out.println(productManagement.getItems());
     }
 }
 

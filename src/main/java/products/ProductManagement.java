@@ -1,5 +1,6 @@
 package products;
 
+
 import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,7 +22,14 @@ public class ProductManagement implements Management<Product> {
             transaction.commit();
         }
     }
-    public List<Product> getProducts() {
+
+    public Product getById(int id) {
+        try (Session session = Hibernate.getInstance().getSessions().openSession()) {
+            return session.get(Product.class, id);
+        }
+    }
+
+    public List<Product> getItems() {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             JpaCriteriaQuery<Product> jpaCriteriaQuery = session
                     .getCriteriaBuilder()
@@ -37,23 +45,21 @@ public class ProductManagement implements Management<Product> {
     public void delete(Product item) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             session.beginTransaction();
-            Product product = getProducts(id);
+            Product product = getById(item.getId());
             if (product == null) {
-                System.out.println("Product with ID: " + id + " not found");
+                System.out.println("Product with ID: " + item.getId() + " not found");
             } else {
                 session.remove(product);
-                System.out.println("Product with ID: " + id + " removed");
+                System.out.println("Product with ID: " + item.getId() + " removed");
             }
             session.getTransaction().commit();
         }
     }
 
-
     @Override
-    public void get() {
-        try (Session session = Hibernate.getInstance().getSessions().openSession()) {
-            return session.get(Product.class, id);
-        }
+    public void deleteById(int id) {
+        Product p = getById(id);
+        delete(p);
     }
 
     @Override
