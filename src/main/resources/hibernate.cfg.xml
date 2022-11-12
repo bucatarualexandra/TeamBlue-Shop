@@ -23,6 +23,5 @@
         <mapping class="users.User"/>
 
 
-
     </session-factory>
 </hibernate-configuration>
