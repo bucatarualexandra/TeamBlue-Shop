@@ -16,11 +16,11 @@
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <mapping class="TeamBlue-Shop.products.Product"/>
-        <mapping class="TeamBlue-Shop.products.Storage"/>
-        <mapping class="TeamBlue-Shop.sales.Discount"/>
-        <mapping class="TeamBlue-Shop.sales.Order"/>
-        <mapping class="TeamBlue-Shop.users.User"/>
+        <mapping class="products.Product"/>
+        <mapping class="products.Storage"/>
+        <mapping class="sales.Discount"/>
+        <mapping class="sales.Order"/>
+        <mapping class="users.User"/>
 
 
 
