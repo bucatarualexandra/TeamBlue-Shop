@@ -34,7 +34,7 @@
             <version>8.0.31</version>
         </dependency>
 
-        <!--Hibernate-->
+        <!--utils.Hibernate-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
