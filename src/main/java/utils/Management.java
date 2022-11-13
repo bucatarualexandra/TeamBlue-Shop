@@ -9,9 +9,9 @@ public interface Management<T> {
 
     void update(T item);
 
-    T getById(int id);
+    T getById(Long id);
 
     List<T> getItems();
 
-    void deleteById(int id);
+    void deleteById(Long id);
 }

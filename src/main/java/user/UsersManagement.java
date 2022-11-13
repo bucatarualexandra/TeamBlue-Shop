@@ -1,4 +1,4 @@
-package users;
+package user;
 
 
 import jakarta.persistence.TypedQuery;
@@ -22,7 +22,7 @@ public class UsersManagement implements Management<User> {
         }
     }
 
-    public User getById(int id) {
+    public User getById(Long id) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             return session.get(User.class, id);
         }
@@ -56,7 +56,7 @@ public class UsersManagement implements Management<User> {
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         User p = getById(id);
         delete(p);
     }

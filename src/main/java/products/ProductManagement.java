@@ -10,9 +10,9 @@ import utils.Management;
 
 import java.util.List;
 
-public class ProductManagement implements Management<Product> {
+public class ProductManagement implements Management<Item> {
     @Override
-    public void insert(Product item) {
+    public void insert(Item item) {
         System.out.println("Persist product ...");
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -23,29 +23,29 @@ public class ProductManagement implements Management<Product> {
         }
     }
 
-    public Product getById(int id) {
+    public Item getById(Long id) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
-            return session.get(Product.class, id);
+            return session.get(Item.class, id);
         }
     }
 
-    public List<Product> getItems() {
+    public List<Item> getItems() {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
-            JpaCriteriaQuery<Product> jpaCriteriaQuery = session
+            JpaCriteriaQuery<Item> jpaCriteriaQuery = session
                     .getCriteriaBuilder()
-                    .createQuery(Product.class);
-            jpaCriteriaQuery.from(Product.class);
+                    .createQuery(Item.class);
+            jpaCriteriaQuery.from(Item.class);
 
-            TypedQuery<Product> typedQuery = session.createQuery(jpaCriteriaQuery);
+            TypedQuery<Item> typedQuery = session.createQuery(jpaCriteriaQuery);
             return typedQuery.getResultList();
         }
     }
 
     @Override
-    public void delete(Product item) {
+    public void delete(Item item) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             session.beginTransaction();
-            Product product = getById(item.getId());
+            Item product = getById(item.getId());
             if (product == null) {
                 System.out.println("Product with ID: " + item.getId() + " not found");
             } else {
@@ -57,13 +57,13 @@ public class ProductManagement implements Management<Product> {
     }
 
     @Override
-    public void deleteById(int id) {
-        Product p = getById(id);
+    public void deleteById(Long id) {
+        Item p = getById(id);
         delete(p);
     }
 
     @Override
-    public void update(Product item) {
+    public void update(Item item) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             session.beginTransaction();
 

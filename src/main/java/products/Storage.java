@@ -8,12 +8,13 @@ import lombok.Data;
 public class Storage {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer Id;
+    private Long Id;
 
     private Integer stock;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Stock", referencedColumnName = "Id")
-    private Product product;
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "Id")
+    private Item item;
 
 }

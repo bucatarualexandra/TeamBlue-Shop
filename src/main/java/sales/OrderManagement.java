@@ -5,15 +5,14 @@ import jakarta.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.criteria.JpaCriteriaQuery;
-import users.User;
 import utils.Hibernate;
 import utils.Management;
 
 import java.util.List;
 
-public class OrderManagement implements Management<Order> {
+public class OrderManagement implements Management<OrderItem> {
     @Override
-    public void insert(Order item) {
+    public void insert(OrderItem item) {
         System.out.println("Persist order ...");
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -24,33 +23,33 @@ public class OrderManagement implements Management<Order> {
         }
     }
 
-    public Order getById(int id) {
+    public OrderItem getById(Long id) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
-            return session.get(Order.class, id);
+            return session.get(OrderItem.class, id);
         }
     }
 
-    public List<Order> getItems() {
+    public List<OrderItem> getItems() {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
-            JpaCriteriaQuery<Order> jpaCriteriaQuery = session
+            JpaCriteriaQuery<OrderItem> jpaCriteriaQuery = session
                     .getCriteriaBuilder()
-                    .createQuery(Order.class);
-            jpaCriteriaQuery.from(Order.class);
+                    .createQuery(OrderItem.class);
+            jpaCriteriaQuery.from(OrderItem.class);
 
-            TypedQuery<Order> typedQuery = session.createQuery(jpaCriteriaQuery);
+            TypedQuery<OrderItem> typedQuery = session.createQuery(jpaCriteriaQuery);
             return typedQuery.getResultList();
         }
     }
 
     @Override
-    public void delete(Order item) {
+    public void delete(OrderItem item) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             session.beginTransaction();
-            Order order = getById(item.getId());
-            if (order == null) {
+            OrderItem orderItem = getById(item.getId());
+            if (orderItem == null) {
                 System.out.println("Order with ID: " + item.getId() + " not found");
             } else {
-                session.remove(order);
+                session.remove(orderItem);
                 System.out.println("Order with ID: " + item.getId() + " removed");
             }
             session.getTransaction().commit();
@@ -58,13 +57,13 @@ public class OrderManagement implements Management<Order> {
     }
 
     @Override
-    public void deleteById(int id) {
-        Order p = getById(id);
+    public void deleteById(Long id) {
+        OrderItem p = getById(id);
         delete(p);
     }
 
     @Override
-    public void update(Order item) {
+    public void update(OrderItem item) {
         try (Session session = Hibernate.getInstance().getSessions().openSession()) {
             session.beginTransaction();
 
