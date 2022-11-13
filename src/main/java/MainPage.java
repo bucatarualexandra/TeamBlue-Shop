@@ -1,6 +1,8 @@
 import products.Item;
 import products.ProductManagement;
 import products.Storage;
+import user.User;
+import user.UsersManagement;
 
 import java.util.ArrayList;
 
@@ -8,6 +10,12 @@ public class MainPage {
     public static void main(String[] args) {
         Storage storageTv = new Storage();
         storageTv.setStock(8);
+
+        Storage storagePhone = new Storage();
+        storagePhone.setStock(2);
+
+        Storage storageFridge = new Storage();
+        storageFridge.setStock(3);
 
         Item tv = new Item();
         tv.setProductName("TV");
@@ -22,11 +30,17 @@ public class MainPage {
         phone.setProductName("Phone");
         phone.setDescription("Smartphone");
         phone.setPrice(1500.0);
+        phone.setStorage(storagePhone);
+
+        storagePhone.setItem(phone);
 
         Item fridge = new Item();
         fridge.setProductName("Fridge");
         fridge.setDescription("Cooler A++");
         fridge.setPrice(3500.0);
+        fridge.setStorage(storageFridge);
+
+        storageFridge.setItem(fridge);
 
 
 //        Product tv = new Product();
@@ -46,16 +60,16 @@ public class MainPage {
         productManagement.insert(fridge);
 //        productManagement.update(tv);
 //        System.out.println(productManagement.getById(102));
-//        productManagement.deleteById(102);
+//        productManagement.deleteById(152L);
 //        System.out.println(productManagement.getItems());
 
-//        User user1 = new User();
-//        user1.setUserName("Sorin");
-//        user1.setAddress("Iasi");
-//        user1.setEmail("Sorin etc");
-////
-//        UsersManagement usersManagement = new UsersManagement();
-//        usersManagement.insert(user1);
+        User user1 = new User();
+        user1.setUserName("Sorin");
+        user1.setAddress("Iasi");
+        user1.setEmail("Sorin etc");
+//
+        UsersManagement usersManagement = new UsersManagement();
+        usersManagement.insert(user1);
 //        usersManagement.getItems();
         System.out.println("hello");
 
