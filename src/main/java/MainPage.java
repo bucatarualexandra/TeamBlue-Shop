@@ -9,35 +9,10 @@ import user.UsersManagement;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class MainPage {
-    public static void showMenu() {
-        System.out.println("0. Select user");
-        System.out.println("1. Add item");
-        System.out.println("2. Remove item");
-        System.out.println("3. Buy");
-        Scanner scanner = new Scanner(System.in);
-        String result = scanner.nextLine();
-
-        switch (result) {
-            case "0":
-                UsersManagement usersManagement = new UsersManagement();
-                usersManagement.getItems().forEach((user) -> System.out.println(user.getUserName()));
-                scanner.next();
-            case "1":
-
-            case "2":
-            case "3":
-            default:
-                System.out.println("Invalid option");
-        }
-
-    }
-
-    public static void add() {
-
-    }
-
+    static OrderItem orderItem = new OrderItem();
 
     public static void main(String[] args) {
 //        Storage storageTv = new Storage();
@@ -48,7 +23,7 @@ public class MainPage {
 //
 //        Storage storageFridge = new Storage();
 //        storageFridge.setStock(3);
-////
+//
 //        Item tv = new Item();
 //        tv.setProductName("TV");
 //        tv.setDescription("8k");
@@ -57,7 +32,7 @@ public class MainPage {
 //        tv.setStorage(storageTv);
 //
 //        storageTv.setItem(tv);
-////
+//
 //        Item phone = new Item();
 //        phone.setProductName("Phone");
 //        phone.setDescription("Smartphone");
@@ -74,18 +49,6 @@ public class MainPage {
 //
 //        storageFridge.setItem(fridge);
 
-
-//        Product tv = new Product();
-//        tv.setId(1);
-//        tv.setName("TV");
-//        tv.setDescription("4k");
-//        tv.setPrice(3000.0);
-//
-//        Product stove = new Product();
-//        stove.setName("Stove");
-//        stove.setDescription("Induction stove");
-//        stove.setPrice(1500.0);
-
 //        ProductManagement productManagement = new ProductManagement();
 //        productManagement.insert(tv);
 //        productManagement.insert(phone);
@@ -94,19 +57,21 @@ public class MainPage {
 //        System.out.println(productManagement.getById(102));
 //        productManagement.deleteById(152L);
 //        System.out.println(productManagement.getItems());
-
+//
 //        User user2 = new User();
 //        user2.setUserName("Alexandra");
 //        user2.setAddress("Cluj");
 //        user2.setEmail("Alexandra  email etc");
-////
+//
 //        UsersManagement usersManagement = new UsersManagement();
 //        usersManagement.insert(user2);
 //        usersManagement.getItems();
 //        System.out.println("hello");
+
+//        OrderManagement orderManagement = new OrderManagement();
+//        orderManagement.getById();
 //
-////        OrderManagement orderManagement = new OrderManagement();
-////        orderManagement.getById(1);
+//
 //        OrderItem orderItem = new OrderItem();
 //        if (storageTv.getStock() >= 1) {
 //            orderItem.addItemsToOrder(tv);
@@ -114,8 +79,70 @@ public class MainPage {
 //        } else {
 //            System.out.println("Sorry, item not in store");
 //        }
+        while (true) {
+            showMenu();
+        }
+    }
 
+
+    public static void showMenu() {
+        System.out.println("0. Select user");
+        System.out.println("1. Show items");
+        System.out.println("2. Add item");
+        System.out.println("3. Remove item");
+        System.out.println("3. Buy");
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Your input: ");
+        String result = scanner.nextLine();
+
+        switch (result) {
+            case "0":
+                logIn();
+
+                break;
+            case "1":
+                System.out.println("These are the available products: ");
+                showItems();
+                break;
+            case "2":
+
+                break;
+            case "3":
+
+                break;
+            case "4":
+
+                break;
+            default:
+                System.out.println("Invalid option");
+        }
 
     }
+
+    public static void logIn() {
+        Scanner scanner = new Scanner(System.in);
+        UsersManagement usersManagement = new UsersManagement();
+        usersManagement.getItems().forEach((user) -> System.out.println(user.getUserName()));
+        System.out.println("Choose username: ");
+        String userName = scanner.nextLine();
+        User user = usersManagement.getItems().stream()
+                .filter((usr) -> usr.getUserName().equalsIgnoreCase(userName))
+                .toList()
+                .get(0);
+        System.out.println(user);
+//        orderItem.setUser(user);
+    }
+
+    public static void showItems() {
+        ProductManagement productManagement = new ProductManagement();
+        productManagement.getItems().forEach((item) -> System.out.println(item.getId()
+                + " " + item.getProductName()));
+    }
+
+//    public static void addItem() {
+//        orderItem.addItemsToOrder()
+//    }
 }
+
+
 
