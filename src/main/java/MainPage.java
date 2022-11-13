@@ -1,6 +1,9 @@
 import products.Item;
 import products.ProductManagement;
 import products.Storage;
+import sales.Discount;
+import sales.OrderItem;
+import sales.OrderManagement;
 import user.User;
 import user.UsersManagement;
 
@@ -16,7 +19,7 @@ public class MainPage {
 
         Storage storageFridge = new Storage();
         storageFridge.setStock(3);
-
+//
         Item tv = new Item();
         tv.setProductName("TV");
         tv.setDescription("8k");
@@ -25,7 +28,7 @@ public class MainPage {
         tv.setStorage(storageTv);
 
         storageTv.setItem(tv);
-
+//
         Item phone = new Item();
         phone.setProductName("Phone");
         phone.setDescription("Smartphone");
@@ -54,28 +57,34 @@ public class MainPage {
 //        stove.setDescription("Induction stove");
 //        stove.setPrice(1500.0);
 
-        ProductManagement productManagement = new ProductManagement();
-        productManagement.insert(tv);
-        productManagement.insert(phone);
-        productManagement.insert(fridge);
+//        ProductManagement productManagement = new ProductManagement();
+//        productManagement.insert(tv);
+//        productManagement.insert(phone);
+//        productManagement.insert(fridge);
 //        productManagement.update(tv);
 //        System.out.println(productManagement.getById(102));
 //        productManagement.deleteById(152L);
 //        System.out.println(productManagement.getItems());
 
-        User user1 = new User();
-        user1.setUserName("Sorin");
-        user1.setAddress("Iasi");
-        user1.setEmail("Sorin etc");
-//
-        UsersManagement usersManagement = new UsersManagement();
-        usersManagement.insert(user1);
+//        User user2 = new User();
+//        user2.setUserName("Alexandra");
+//        user2.setAddress("Cluj");
+//        user2.setEmail("Alexandra  email etc");
+////
+//        UsersManagement usersManagement = new UsersManagement();
+//        usersManagement.insert(user2);
 //        usersManagement.getItems();
         System.out.println("hello");
 
 //        OrderManagement orderManagement = new OrderManagement();
 //        orderManagement.getById(1);
-
+        OrderItem orderItem = new OrderItem();
+        if (storageTv.getStock() >= 1) {
+            orderItem.addItemsToOrder(tv);
+            storageTv.decrement();
+        } else {
+            System.out.println("Sorry, item not in store");
+        }
 
     }
 }

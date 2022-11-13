@@ -2,6 +2,7 @@ package products;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import sales.OrderItem;
 
 @Entity
 @Data
@@ -17,4 +18,13 @@ public class Storage {
     @JoinColumn(name = "Id")
     private Item item;
 
+    public void increment() {
+        stock += 1;
+    }
+
+    public void decrement() {
+        if (stock != 0) {
+            stock -= 1;
+        }
+    }
 }
