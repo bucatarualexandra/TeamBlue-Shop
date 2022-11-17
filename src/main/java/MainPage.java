@@ -92,7 +92,7 @@ public class MainPage {
         System.out.println("1. Show items");
         System.out.println("2. Add item");
         System.out.println("3. Remove item");
-        System.out.println("3. Buy");
+        System.out.println("4. Buy");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Your input: ");
         String result = scanner.nextLine();
@@ -142,25 +142,34 @@ public class MainPage {
 
     public static void addItem() {
         Storage storage = new Storage();
-        System.out.println("Choose an item you want to add to your cart: ");
+
         productManagement.getItems().forEach((item) -> System.out.println(item.getId()
                 + " " + item.getProductName()));
-
+        System.out.println("Choose an item you want to add to your cart: ");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Your item id: ");
         String result = scanner.nextLine();
         if ("1".equals(result)) {
             orderItem.addItemsToOrder(productManagement.getById(1L));
-            storage.getById(1L);
-            storage.decrement();
+//            storage.getById(1L);
+//            storage.decrement();
+            int stock = productManagement.getById(1L).getStorage().getStock();
+            stock--;
+            productManagement.getById(1L).getStorage().setStock(stock);
         } else if ("2".equals(result)) {
             orderItem.addItemsToOrder(productManagement.getById(2L));
-            storage.getById(2L);
-            storage.decrement();
+//            storage.getById(2L);
+//            storage.decrement();
+            int stock = productManagement.getById(2L).getStorage().getStock();
+            stock--;
+            productManagement.getById(2L).getStorage().setStock(stock);
         } else if ("3".equals(result)) {
             orderItem.addItemsToOrder(productManagement.getById(3L));
-            storage.getById(3L);
-            storage.decrement();
+//            storage.getById(3L);
+//            storage.decrement();
+            int stock = productManagement.getById(3L).getStorage().getStock();
+            stock--;
+            productManagement.getById(3L).getStorage().setStock(stock);
         } else {
             System.out.println("Invalid item");
         }
@@ -168,25 +177,32 @@ public class MainPage {
 
     public static void removeItem() {
         Storage storage = new Storage();
-        System.out.println("Choose an item you want to remove from your cart: ");
         productManagement.getItems().forEach((item) -> System.out.println(item.getId()
                 + " " + item.getProductName()));
-
+        System.out.println("Choose an item you want to remove from your cart: ");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Your item id: ");
         String result = scanner.nextLine();
         if ("1".equals(result)) {
-            orderItem.addItemsToOrder(productManagement.getById(1L));
-            storage.getById(1L);
-            storage.increment();
+            orderItem.removeItemsFromOrder(1L);
+            int stock = productManagement.getById(1L).getStorage().getStock();
+            stock++;
+            productManagement.getById(1L).getStorage().setStock(stock);
+
         } else if ("2".equals(result)) {
-            orderItem.addItemsToOrder(productManagement.getById(2L));
-            storage.getById(2L);
-            storage.increment();
+            orderItem.removeItemsFromOrder(2L);
+//            storage.getById(2L);
+//            storage.increment();
+            int stock = productManagement.getById(2L).getStorage().getStock();
+            stock++;
+            productManagement.getById(2L).getStorage().setStock(stock);
         } else if ("3".equals(result)) {
-            orderItem.addItemsToOrder(productManagement.getById(3L));
-            storage.getById(3L);
-            storage.increment();
+            orderItem.removeItemsFromOrder(3L);
+//            storage.getById(3L);
+//            storage.increment();
+            int stock = productManagement.getById(3L).getStorage().getStock();
+            stock++;
+            productManagement.getById(3L).getStorage().setStock(stock);
         } else {
             System.out.println("Invalid item");
         }
