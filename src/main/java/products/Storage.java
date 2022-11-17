@@ -2,7 +2,8 @@ package products;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import sales.OrderItem;
+import org.hibernate.Session;
+import utils.Hibernate;
 
 @Entity
 @Data
@@ -25,6 +26,12 @@ public class Storage {
     public void decrement() {
         if (stock != 0) {
             stock -= 1;
+        }
+    }
+
+    public Storage getById(Long id) {
+        try (Session session = Hibernate.getInstance().getSessions().openSession()) {
+            return session.get(Storage.class, id);
         }
     }
 }

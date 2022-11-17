@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 
 public class MainPage {
     static OrderItem orderItem = new OrderItem();
+    static ProductManagement productManagement = new ProductManagement();
+
 
     public static void main(String[] args) {
 //        Storage storageTv = new Storage();
@@ -105,13 +107,13 @@ public class MainPage {
                 showItems();
                 break;
             case "2":
-
+                addItem();
                 break;
             case "3":
-
+                removeItem();
                 break;
             case "4":
-
+                registerOrder();
                 break;
             default:
                 System.out.println("Invalid option");
@@ -134,14 +136,66 @@ public class MainPage {
     }
 
     public static void showItems() {
-        ProductManagement productManagement = new ProductManagement();
         productManagement.getItems().forEach((item) -> System.out.println(item.getId()
                 + " " + item.getProductName()));
     }
 
-//    public static void addItem() {
-//        orderItem.addItemsToOrder()
-//    }
+    public static void addItem() {
+        Storage storage = new Storage();
+        System.out.println("Choose an item you want to add to your cart: ");
+        productManagement.getItems().forEach((item) -> System.out.println(item.getId()
+                + " " + item.getProductName()));
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Your item id: ");
+        String result = scanner.nextLine();
+        if ("1".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(1L));
+            storage.getById(1L);
+            storage.decrement();
+        } else if ("2".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(2L));
+            storage.getById(2L);
+            storage.decrement();
+        } else if ("3".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(3L));
+            storage.getById(3L);
+            storage.decrement();
+        } else {
+            System.out.println("Invalid item");
+        }
+    }
+
+    public static void removeItem() {
+        Storage storage = new Storage();
+        System.out.println("Choose an item you want to remove from your cart: ");
+        productManagement.getItems().forEach((item) -> System.out.println(item.getId()
+                + " " + item.getProductName()));
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Your item id: ");
+        String result = scanner.nextLine();
+        if ("1".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(1L));
+            storage.getById(1L);
+            storage.increment();
+        } else if ("2".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(2L));
+            storage.getById(2L);
+            storage.increment();
+        } else if ("3".equals(result)) {
+            orderItem.addItemsToOrder(productManagement.getById(3L));
+            storage.getById(3L);
+            storage.increment();
+        } else {
+            System.out.println("Invalid item");
+        }
+    }
+
+    public static void registerOrder() {
+        OrderManagement orderManagement = new OrderManagement();
+        orderManagement.insert(orderItem);
+    }
 }
 
 
