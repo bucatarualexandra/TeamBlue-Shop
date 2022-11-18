@@ -132,7 +132,7 @@ public class MainPage {
                 .toList()
                 .get(0);
         System.out.println(user);
-//        orderItem.setUser(user);
+        orderItem.setUser(user);
     }
 
     public static void showItems() {
@@ -145,9 +145,8 @@ public class MainPage {
 
         productManagement.getItems().forEach((item) -> System.out.println(item.getId()
                 + " " + item.getProductName()));
-        System.out.println("Choose an item you want to add to your cart: ");
+        System.out.println("Choose an item ID you want to add to your cart: ");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Your item id: ");
         String result = scanner.nextLine();
         if ("1".equals(result)) {
             orderItem.addItemsToOrder(productManagement.getById(1L));
@@ -179,9 +178,8 @@ public class MainPage {
         Storage storage = new Storage();
         productManagement.getItems().forEach((item) -> System.out.println(item.getId()
                 + " " + item.getProductName()));
-        System.out.println("Choose an item you want to remove from your cart: ");
+        System.out.println("Choose an item ID you want to remove from your cart: ");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Your item id: ");
         String result = scanner.nextLine();
         if ("1".equals(result)) {
             orderItem.removeItemsFromOrder(1L);
@@ -210,6 +208,15 @@ public class MainPage {
 
     public static void registerOrder() {
         OrderManagement orderManagement = new OrderManagement();
+        if (orderItem.getTotal() >= 3000) {
+            orderItem.setDiscount(Discount.DISCOUNT_10);
+            orderItem.setTotal(orderItem.getTotal() - (orderItem.getTotal()) * 0.1);
+        } else if (orderItem.getTotal() >= 5000) {
+            orderItem.setDiscount(Discount.DISCOUNT_20);
+            orderItem.setTotal(orderItem.getTotal() - (orderItem.getTotal()) * 0.2);
+        } else {
+            orderItem.setTotal(orderItem.getTotal());
+        }
         orderManagement.insert(orderItem);
     }
 }
