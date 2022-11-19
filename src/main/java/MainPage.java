@@ -50,15 +50,21 @@ public class MainPage {
 //        fridge.setStorage(storageFridge);
 //
 //        storageFridge.setItem(fridge);
-
+//
 //        ProductManagement productManagement = new ProductManagement();
 //        productManagement.insert(tv);
 //        productManagement.insert(phone);
 //        productManagement.insert(fridge);
-//        productManagement.update(tv);
-//        System.out.println(productManagement.getById(102));
-//        productManagement.deleteById(152L);
+////        productManagement.update(tv);
+////        System.out.println(productManagement.getById(102));
+////        productManagement.deleteById(152L);
 //        System.out.println(productManagement.getItems());
+//
+//        User user1 = new User();
+//        user1.setUserName("Sorin");
+//        user1.setAddress("Iasi");
+//        user1.setEmail("Sorin  email etc");
+//
 //
 //        User user2 = new User();
 //        user2.setUserName("Alexandra");
@@ -67,20 +73,9 @@ public class MainPage {
 //
 //        UsersManagement usersManagement = new UsersManagement();
 //        usersManagement.insert(user2);
-//        usersManagement.getItems();
-//        System.out.println("hello");
+//        usersManagement.insert(user1);
 
-//        OrderManagement orderManagement = new OrderManagement();
-//        orderManagement.getById();
-//
-//
-//        OrderItem orderItem = new OrderItem();
-//        if (storageTv.getStock() >= 1) {
-//            orderItem.addItemsToOrder(tv);
-//            storageTv.decrement();
-//        } else {
-//            System.out.println("Sorry, item not in store");
-//        }
+
         while (true) {
             showMenu();
         }
@@ -217,6 +212,7 @@ public class MainPage {
         } else {
             orderItem.setTotal(orderItem.getTotal());
         }
+
         orderManagement.insert(orderItem);
     }
 }

@@ -22,7 +22,7 @@ public class OrderItem {
             joinColumns = {@JoinColumn(name = "order_id")},
             inverseJoinColumns = {@JoinColumn(name = "item_id")}
     )
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     private List<Item> items;
 
     private Double total;
@@ -31,6 +31,7 @@ public class OrderItem {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Enumerated(EnumType.STRING)
     private Discount discount;
     private boolean isPaid;
 
