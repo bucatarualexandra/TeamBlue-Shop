@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class MainPage {
     static OrderItem orderItem = new OrderItem();
     static ProductManagement productManagement = new ProductManagement();
+    static UsersManagement usersManagement = new UsersManagement();
 
 
     public static void main(String[] args) {
@@ -70,8 +71,7 @@ public class MainPage {
 //        user2.setUserName("Alexandra");
 //        user2.setAddress("Cluj");
 //        user2.setEmail("Alexandra  email etc");
-//
-//        UsersManagement usersManagement = new UsersManagement();
+
 //        usersManagement.insert(user2);
 //        usersManagement.insert(user1);
 
@@ -88,6 +88,7 @@ public class MainPage {
         System.out.println("2. Add item");
         System.out.println("3. Remove item");
         System.out.println("4. Buy");
+        System.out.println("5. Exit");
         Scanner scanner = new Scanner(System.in);
         System.out.println("Your input: ");
         String result = scanner.nextLine();
@@ -95,6 +96,7 @@ public class MainPage {
         switch (result) {
             case "0":
                 logIn();
+                System.out.println("User selected");
 
                 break;
             case "1":
@@ -103,12 +105,19 @@ public class MainPage {
                 break;
             case "2":
                 addItem();
+                System.out.println("Item was added to the shopping cart");
                 break;
             case "3":
                 removeItem();
+                System.out.println("Item was removed from the shopping cart");
                 break;
             case "4":
                 registerOrder();
+                System.out.println("Order was registered. Your items will be arriving soon");
+                break;
+            case "5":
+                System.out.println("Please come again!");
+                System.exit(0);
                 break;
             default:
                 System.out.println("Invalid option");
